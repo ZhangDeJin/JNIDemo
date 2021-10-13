@@ -19,3 +19,19 @@ JNIEXPORT jstring JNICALL Java_com_zdj_jnidemo_cpp_HelloNDK_stringFromNDK
 }
 #endif
 #endif
+
+//
+//对上面的代码做一个说明：
+//首先，函数名的格式遵循如下规则：Java_包名_类名_方法名。
+//比如HelloNDK中的stringFromNDK方法，到这里就变成了
+// JNIEXPORT jstring JNICALL Java_com_zdj_jnidemo_cpp_HelloNDK_stringFromNDK(JNIEnv*, jclass);
+// JNIEnv*:表示一个指向JNI环境的指针，可以通过它来访问JNI提供的接口方法；
+// jclass:表示Java对象中的this;
+// JNIEXPORT和JNICALL:它们是JNI中所定义的宏，可以在jni.h这个头文件中查找到。
+//下面的宏定义是必需的，它指定extern "C"内部的函数采用C语言的命名风格来编译。否则当JNI采用C++来实现时，
+//由于C和C++编译过程中对函数的命名风格不同，这将导致JNI在链接时无法根据函数名查找具体的函数，那么JNI调用
+//就无法完成。
+//#ifdef _cplusplus
+//extern "C" {
+//#endif
+//
